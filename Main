@@ -1,0 +1,17 @@
+import pandas as pd
+import glob
+import os
+path = r""
+
+os.chdir(path)
+extension = 'csv'
+filenames =  [i for i in glob.glob('*.{}'.format(extension))]
+combined_csv = pd.concat([pd.read_csv(f) for f in filenames])
+
+#sorting/filtering
+#combined_csv = combined_csv[combined_csv["Account name"].str.contains("sec", case=False)]
+#combined_csv = combined_csv[combined_csv["Transaction amount"].notna()]
+#combined_csv.sort_values(by=['Account number (preferred / formatted)'])
+
+
+combined_csv.to_csv("SCBFIX.csv", index=False, encoding='utf-8-sig')
